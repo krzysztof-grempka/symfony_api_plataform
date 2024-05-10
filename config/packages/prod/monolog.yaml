@@ -1,0 +1,37 @@
+monolog:
+    handlers:
+        streamed:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: ['!event', '!workflow', '!doctrine', '!lock', '!import']
+#            max_files: 10
+        main:
+            type: fingers_crossed
+            # 500 errors are logged at the critical level
+            action_level: critical
+            # to also log 400 level errors (but not 404's):
+            # action_level: error
+            excluded_http_codes: [404, 406, 403]
+            handler: grouped
+        grouped:
+            type: group
+            members: [ streamed, deduplicated ]
+        deduplicated:
+            type: deduplication
+            handler: symfony_mailer
+        symfony_mailer:
+            type: symfony_mailer
+            from_email: 'do-not-reply@inwentury.pl'
+            to_email: 'kornel@emplo.it'
+            # or list of recipients
+            # to_email:   ['dev1@example.com', 'dev2@example.com', ...]
+            subject: 'An Error Occurred! %%message%%'
+            level: debug
+            formatter: monolog.formatter.html
+            content_type: text/html
+        import:
+            type: stream
+            path: "%kernel.logs_dir%/import_%kernel.environment%.log"
+            level: error
+            channels: [ 'import' ]

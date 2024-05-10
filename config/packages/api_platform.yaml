@@ -1,0 +1,32 @@
+api_platform:
+    version: 1.0.0
+    mapping:
+        paths: [
+            '%kernel.project_dir%/src/Infrastructure/User/ApiPlatform/Resource/',
+        ]
+    patch_formats:
+        json: [
+            'application/merge-patch+json'
+        ]
+    formats:
+        jsonld: ['application/ld+json']
+        json: ['application/json']
+        html: ['text/html']
+        multipart: ['multipart/form-data']
+        csv: ['text/csv']
+        xlsx: ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
+    swagger:
+        versions: [3]
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header
+    exception_to_status:
+        Webmozart\Assert\InvalidArgumentException: 422
+#        App\Application\Shared\Exception\NotFoundException: 404
+#        App\Application\Shared\Exception\UniqueConstraintException: 409
+#        App\Application\Shared\Exception\WorkflowException: 423
+        Symfony\Component\PasswordHasher\Exception\InvalidPasswordException: 406
+        Symfony\Component\HttpKernel\Exception\ConflictHttpException: 409
+        Symfony\Component\Finder\Exception\AccessDeniedException: 403
+        Symfony\Component\Security\Core\Exception\AccessDeniedException: 403

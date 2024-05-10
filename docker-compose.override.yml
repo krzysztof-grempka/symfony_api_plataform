@@ -1,0 +1,10 @@
+services:
+  php:
+    volumes:
+      - ./:/srv/app:rw,cached
+      - /srv/app/var
+      - /srv/app/vendor
+    environment:
+      APP_ENV: dev
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

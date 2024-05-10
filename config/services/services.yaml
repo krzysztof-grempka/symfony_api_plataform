@@ -1,0 +1,16 @@
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    
+    App\:
+        resource: '../../src/'
+        exclude:
+            - '../src/Infrastructure/Shared/Kernel.php'    
+  
+    acme_api.event.jwt_created_listener:
+        class: App\Application\JWT_Token\EventListener\JWTCreatedListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
