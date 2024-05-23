@@ -54,9 +54,4 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Domain/User/Model'
                 prefix: 'App\Domain\User\Model'
                 alias: 'User'
-            Message:
-                is_bundle: false
-                type: attribute
-                dir: '%kernel.project_dir%/src/Domain/Message/Model'
-                prefix: 'App\Domain\Message\Model'
                 

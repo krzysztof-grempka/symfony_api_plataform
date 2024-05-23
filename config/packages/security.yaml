@@ -1,8 +1,8 @@
 security:
     role_hierarchy:
-        ROLE_EMPLOYEE: ROLE_EMPLOYEE
+        ROLE_USER: ROLE_USER
         ROLE_ADMIN: ROLE_ADMIN
-    
+        
     # https://symfony.com/doc/current/security.html#c-hashing-passwords
     password_hashers:
         App\Domain\User\Model\User: 'auto'

@@ -8,14 +8,10 @@ parameters:
     level: 7
     paths:
         - src
+        - tests
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
     ignoreErrors:
-        - identifier: missingType.iterableValue
-        - identifier: missingType.generics
         - '#^Invalid type Throwable\|false to throw\.$#'
     excludePaths:
         analyse:
-            - src/Infrastructure/Shared/ApiPlatform/OpenApi/DynamicFilterGenerator.php
-            - src/Infrastructure/Shared/Attribute/AttributeReader.php
-            - src/Infrastructure/Message/Service/SmsSender.php
-            - src/Application/User/EventSubscriber/SuccessLoginSubscriber.php
-            - src/Infrastructure/Shared/Doctrine/DoctrinePaginator.php

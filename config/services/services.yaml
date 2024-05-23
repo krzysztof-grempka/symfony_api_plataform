@@ -1,51 +1,14 @@
 
-parameters:
-    emailAddress: '%env(string:EMAIL_ADDRESS)%'
-    smsApiToken: '%env(string:SMS_API_TOKEN)%'
-    sms_api_test_default: true
-
 services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        
-        bind:
-            $projectDir: '%kernel.project_dir%'
-            $urlVerifyEmail: '%env(string:URL_VERIFY_EMAIL)%'
-            $resetPasswordUrl: '%env(string:URL_RESET_PASSWORD)%'
-            $contactEmail: '%env(string:CONTACT_EMAIL)%'
-            $emailAddress: '%env(string:EMAIL_ADDRESS)%'
     
     App\:
         resource: '../../src/'
         exclude:
-            - '../src/Infrastructure/Shared/Kernel.php'
-    
-    Ang3\Component\Serializer\Encoder\ExcelEncoder: ~
-    
-    # <Senders>
-    App\Infrastructure\Message\Service\EmailSender: ~
-    App\Infrastructure\Message\Service\SmsSender:
-        arguments:
-            $apiToken: '%env(string:SMS_API_TOKEN)%'
-            $isTest: '%env(default:sms_api_test_default:bool:SMS_API_TEST)%'
-    App\Application\Message\Service\EmailSenderInterface: '@App\Infrastructure\Message\Service\EmailSender'
-    App\Application\Message\Service\SmsSenderInterface: '@App\Infrastructure\Message\Service\SmsSender'
-    # </Senders>
-    
-    ApiPlatform\Symfony\Bundle\SwaggerUi\SwaggerUiProcessor:
-        arguments:
-            $swaggerUiContext: '@api_platform.swagger_ui.context'
-        public: true
-
-    ApiPlatform\Symfony\Bundle\SwaggerUi\SwaggerUiContext:
-        alias: 'api_platform.swagger_ui.context'
-
-    
-    App\Application\User\EventSubscriber\UserBlockadeSubscriber:
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-    
+            - '../src/Infrastructure/Shared/Kernel.php'    
+  
     acme_api.event.jwt_created_listener:
         class: App\Application\JWT_Token\EventListener\JWTCreatedListener
         arguments: []
