@@ -7,7 +7,7 @@
         "ext-ctype": "*",
         "ext-gd": "*",
         "ext-iconv": "*",
-        "api-platform/core": "^3.0",
+        "api-platform/core": "^3.3",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/doctrine-migrations-bundle": "^3.0",
@@ -121,7 +121,7 @@
         ],
         "php-lint": "parallel-lint --exclude tests/app --exclude vendor --exclude var  --exclude docker .",
         "phpunit": "./vendor/bin/phpunit --no-coverage",
-        "csfixer": "vendor/bin/php-cs-fixer fix src --show-progress=estimating",
+        "csfixer": "vendor/bin/php-cs-fixer fix src --show-progress=bar",
         "cache-clear": [
             "bin/console c:c",
             "bin/console doctrine:cache:clear-metadata",
